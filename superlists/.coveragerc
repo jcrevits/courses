@@ -1,0 +1,12 @@
+[run]
+branch = True
+
+omit =
+    */migrations/*
+    */static/*
+    */tests/*
+    */.virtualenvs/*
+    */manage.py
+
+[html]
+directory=.
