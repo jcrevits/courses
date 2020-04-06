@@ -1,6 +1,10 @@
 # Issues
 
-**TODO: Add description**
+`mix deps.get`
+
+`mix escript.build`
+
+`./issues <username> <repo_name> (<max_count>)`
 
 ## Installation
 
