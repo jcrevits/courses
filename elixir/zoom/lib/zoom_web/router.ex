@@ -18,6 +18,11 @@ defmodule ZoomWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+
+    scope "/room" do
+      live "/new", Room.NewLive, :new
+      live "/:slug", Room.ShowLive, :show
+    end
   end
 
   # Other scopes may use custom stacks.
