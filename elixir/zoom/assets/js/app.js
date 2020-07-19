@@ -13,12 +13,35 @@ import "../css/app.scss"
 //     import socket from "./socket"
 //
 import "phoenix_html"
-import {Socket} from "phoenix"
+import { Socket } from "phoenix"
 import NProgress from "nprogress"
-import {LiveSocket} from "phoenix_live_view"
+import { LiveSocket } from "phoenix_live_view"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+
+let localStream = null
+
+async function initStream() {
+  try {
+    // Gets our local media from the browser and stores it as a const, stream.
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true, width: "1280" })
+    // Stores our stream in the global constant, localStream.
+    localStream = stream
+    // Sets our local video element to stream from the user's webcam (stream).
+    document.getElementById("local-video").srcObject = stream
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+let Hooks = {}
+Hooks.JoinCall = {
+  mounted() {
+    this.el.addEventListener('click', e => { initStream() })
+  }
+}
+
+let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks, params: { _csrf_token: csrfToken } })
 
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", info => NProgress.start())

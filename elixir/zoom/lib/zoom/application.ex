@@ -13,6 +13,7 @@ defmodule Zoom.Application do
       ZoomWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Zoom.PubSub},
+      Zoom.Presence,
       # Start the Endpoint (http/https)
       ZoomWeb.Endpoint
       # Start a worker by calling: Zoom.Worker.start_link(arg)
