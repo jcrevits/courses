@@ -24,6 +24,7 @@ test('Order of elements is maintained', () => {
   q.add(1);
   q.add(2);
   q.add(3);
+  console.log(`${q.data}`)
   expect(q.remove()).toEqual(1);
   expect(q.remove()).toEqual(2);
   expect(q.remove()).toEqual(3);
